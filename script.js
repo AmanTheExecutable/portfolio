@@ -12,29 +12,30 @@ let navLinks = document.querySelectorAll('header nav a');
 
 
 window.onscroll = () => {
+    sections.forEach(sec => {
+        let top = window.scrollY;
+        let offSet = sec.offsetTop - window.innerHeight / 2 - 125;
+        let height = sec.offsetHeight + window.innerHeight;
+        let id = sec.getAttribute('id');
+        let addClass = false;
 
-sections.forEach(sec => {
-    let top = window.scrollY;
-    let offSet = sec.offsetTop-100;
-    let height = sec.offsetHeight;
-    let id = sec.getAttribute('id');
+        if (top >= offSet && top < offSet + height) {
+            navLinks.forEach(links => {
+                links.classList.remove('active');
+                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
+            });
+            addClass = true;
+        }
 
-    if(top >= offSet && top < offSet + height){
-        navLinks.forEach(links => {
-            links.classList.remove('active');
-            document.querySelector('header nav a[href*='+id+']').classList.add('active');
-        });
-        sec.classList.add('show-animate');
-        
-    }
-    else{
-        sec.classList.remove('show-animate');
-    }
-
-});
+        if (addClass) {
+            sec.classList.add('show-animate');
+        } else {
+            sec.classList.remove('show-animate');
+        }
+    });
     let header = document.querySelector('header');
 
-    header.classList.toggle('sticky', window.scrollY > 100 );
+    header.classList.toggle('sticky', window.scrollY > 100);
 
     menuIcon.classList.remove('bx-x');
     navbar.classList.remove('active');
