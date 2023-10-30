@@ -487,7 +487,23 @@ span {
     font-size: 1.7rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
+
+.skills-content .progress h3 .label-icon {
+    display: flex;
+    align-items: center;
+}
+
+.skills-content .progress h3 .label {
+    margin-right: 10px; /* Adjust this value for spacing between label and icon */
+}
+
+.skills-content .progress h3 .progress-percent {
+    flex: 1; /* This will push the progress percentage to the right */
+    text-align: right;
+}
+
 
 .skills-content .progress h3 span {
     color: var(--text-color);
