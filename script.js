@@ -1,43 +1,34 @@
-let menuIcon = document.querySelector('#menu-icon');
-let navbar = document.querySelector('.navbar');
+$(document).ready(function () {
+    let menuIcon = $('#menu-icon');
+    let navbar = $('.navbar');
+    let sections = $('section');
+    let navLinks = $('header nav a');
+    let header = $('header');
+    let footer = $('footer');
 
-
-menuIcon.onclick = () => {
-    menuIcon.classList.toggle('bx-x');
-    navbar.classList.toggle('active');
-}
-
-let sections = document.querySelectorAll('section');
-let navLinks = document.querySelectorAll('header nav a');
-
-
-window.onscroll = () => {
-    sections.forEach(sec => {
-        let top = window.scrollY;
-        let offSet = sec.offsetTop - window.innerHeight / 2 - 125;
-        let height = sec.offsetHeight + window.innerHeight;
-        let id = sec.getAttribute('id');
-        let addClass = false;
-
-        if (top >= offSet && top < offSet + height) {
-            navLinks.forEach(links => {
-                links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-            });
-            addClass = true;
-        }
-
-        if (addClass) {
-            sec.classList.add('show-animate');
-        } 
+    menuIcon.on('click', function () {
+        menuIcon.toggleClass('bx-x');
+        navbar.toggleClass('active');
     });
-    let header = document.querySelector('header');
 
-    header.classList.toggle('sticky', window.scrollY > 100);
+    $(window).on('scroll', function () {
+        sections.each(function () {
+            let top = $(window).scrollTop();
+            let offSet = $(this).offset().top - $(window).height() / 2 - 125;
+            let height = $(this).outerHeight() + $(window).height();
+            let id = $(this).attr('id');
 
-    menuIcon.classList.remove('bx-x');
-    navbar.classList.remove('active');
+            if (top >= offSet && top < offSet + height) {
+                navLinks.removeClass('active');
+                $('header nav a[href*=' + id + ']').addClass('active');
+                $(this).addClass('show-animate');
+            }
+        });
 
-    let footer = document.querySelector('footer');
-    footer.classList.toggle('show-animate', this.innerHeight + this.scrollY >= document.scrollingElement.scrollHeight);
-}
+        header.toggleClass('sticky', $(window).scrollTop() > 100);
+        menuIcon.removeClass('bx-x');
+        navbar.removeClass('active');
+
+        footer.toggleClass('show-animate', $(window).innerHeight() + $(window).scrollTop() >= $(document).height());
+    });
+});
