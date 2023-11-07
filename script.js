@@ -29,6 +29,6 @@ $(document).ready(function () {
         menuIcon.removeClass('bx-x');
         navbar.removeClass('active');
 
-        footer.toggleClass('show-animate', $(window).innerHeight() + $(window).scrollTop() >= $(document).height());
+        // footer.toggleClass('show-animate', $(window).innerHeight() + $(window).scrollTop() >= $(document).height());
     });
 });
